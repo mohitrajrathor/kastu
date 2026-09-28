@@ -1,0 +1,27 @@
+# Git
+.git
+.gitignore
+
+# Python / Virtualenv
+__pycache__/
+*.py[cod]
+*$py.class
+backend/.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+.npm/
+
+# Environment files and credentials
+.env
+.env.*
+!.env.example
+
+# IDE / OS files
+.DS_Store
+.vscode/
+.idea/
