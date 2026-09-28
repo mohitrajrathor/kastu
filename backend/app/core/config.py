@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     transcribe_partial_results_stability: str = "medium"
 
     # Amazon Bedrock & Guardrails
-    bedrock_model_id: str = "amazon.nova-pro-v1:0"
+    bedrock_model_id: str = "apac.amazon.nova-pro-v1:0"
     bedrock_guardrail_id: Optional[str] = None
     bedrock_guardrail_version: Optional[str] = "DRAFT"
     bedrock_inference_profile_id: Optional[str] = None
