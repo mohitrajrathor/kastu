@@ -94,3 +94,33 @@ async def test_get_topics():
         assert len(topics) >= 3
         assert any(t["id"] == "daily-life" for t in topics)
         assert any("title" in t and "difficulty" in t for t in topics)
+
+@pytest.mark.asyncio
+async def test_dev_user_seeding_and_login(dynamodb_mock):
+    from app.services.dynamo import seed_dev_user
+    from app.core.config import get_settings
+    from app.main import app
+
+    settings = get_settings()
+
+    # 1. Seed developer test user
+    seeded = seed_dev_user(dynamodb=dynamodb_mock)
+    assert seeded is not None
+    assert seeded["email"] == settings.dev_user_email
+
+    # 2. Re-seeding is idempotent
+    second_run = seed_dev_user(dynamodb=dynamodb_mock)
+    assert second_run is not None
+    assert second_run["email"] == settings.dev_user_email
+
+    # 3. Log in with seeded developer credentials
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+        login_resp = await ac.post("/api/auth/login", json={
+            "email": settings.dev_user_email,
+            "password": settings.dev_user_password
+        })
+        assert login_resp.status_code == 200
+        data = login_resp.json()
+        assert "token" in data
+        assert data["userId"] == seeded["userId"]
+

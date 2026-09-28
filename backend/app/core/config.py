@@ -39,6 +39,11 @@ class Settings(BaseSettings):
     jwt_expiry_seconds: int = 1800
     bcrypt_cost: int = 12
 
+    # Dev / Testing Credentials
+    dev_user_email: str = "dev@kastu.ai"
+    dev_user_password: str = "Password123!"
+    auto_seed_dev_user: bool = True
+
     model_config = SettingsConfigDict(
         env_file=(".env", "../.env"),
         env_file_encoding="utf-8",

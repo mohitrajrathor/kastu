@@ -11,8 +11,8 @@ interface AuthModalProps {
 
 export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
   const [isLogin, setIsLogin] = useState(true)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('dev@kastu.ai')
+  const [password, setPassword] = useState('Password123!')
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -49,7 +49,7 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
           <X className="w-5 h-5" />
         </button>
 
-        <div className="text-center mb-6">
+        <div className="text-center mb-5">
           <span className="kastu-wordmark text-3xl font-display">kastu</span>
           <h2 className="text-xl font-bold font-sans mt-2">
             {isLogin ? 'Welcome back' : 'Start your journey'}
@@ -57,6 +57,23 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
           <p className="text-sm text-[#5C5C5C] font-body mt-1">
             {isLogin ? 'Sign in to continue your voice practice' : 'Create an account to track your progress'}
           </p>
+        </div>
+
+        {/* Developer Testing Preset */}
+        <div className="mb-4 p-2.5 bg-[#E6F5F2] border border-[#1A8C7A]/25 rounded-xl flex items-center justify-between text-xs font-body">
+          <div className="text-[#1A8C7A]">
+            <span className="font-semibold">Dev Preset:</span> dev@kastu.ai
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              setEmail('dev@kastu.ai')
+              setPassword('Password123!')
+            }}
+            className="text-[#1A8C7A] font-bold hover:underline cursor-pointer"
+          >
+            Auto-fill
+          </button>
         </div>
 
         {error && (
