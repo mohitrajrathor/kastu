@@ -1,0 +1,95 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --color-primary: #1A8C7A;
+  --color-primary-dark: #136B5C;
+  --color-primary-light: #E6F5F2;
+  --color-accent: #E8A020;
+  --color-accent-dark: #B87D12;
+  --color-accent-light: #FEF3DC;
+
+  --color-bg-light: #FAF8F5;
+  --color-surface-light: #F2EFE9;
+  --color-border-light: #E0DAD2;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #5C5C5C;
+  --color-text-muted: #8C8C8C;
+
+  --color-success: #2DBD8F;
+  --color-error: #D95F3B;
+  --color-error-bg: #FDEEE9;
+
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --shadow-press-teal: 0 4px 0 0 #136B5C;
+  --shadow-press-gold: 0 4px 0 0 #B87D12;
+  --shadow-press-gray: 0 4px 0 0 #C8C0B4;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg-light);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.kastu-wordmark {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #1A8C7A 0%, #E8A020 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  box-shadow: var(--shadow-press-teal);
+  transition: transform 80ms ease, box-shadow 80ms ease;
+}
+
+.btn-primary:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 0 var(--color-primary-dark);
+}
+
+.btn-primary:hover {
+  background-color: #1E9E8A;
+}
+
+.btn-accent {
+  background-color: var(--color-accent);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  box-shadow: var(--shadow-press-gold);
+  transition: transform 80ms ease, box-shadow 80ms ease;
+}
+
+.btn-accent:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 0 var(--color-accent-dark);
+}
+
+.btn-accent:hover {
+  background-color: #F0A828;
+}
