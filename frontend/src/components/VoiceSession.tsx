@@ -267,7 +267,7 @@ export function VoiceSession({ user, topic, onEndSession }: VoiceSessionProps) {
       case 'PROCESSING':
         return { text: 'Agent Thinking...', color: 'bg-[#FEF6E4] text-[#B87D12] border-[#F5A623]/30 animate-pulse' }
       case 'SPEAKING':
-        return { text: 'Kastu Speaking...', color: 'bg-[#E6FAF4] text-[#2DBD8F] border-[#2DBD8F]/30 animate-pulse' }
+        return { text: 'kastu speaking...', color: 'bg-[#E6FAF4] text-[#2DBD8F] border-[#2DBD8F]/30 animate-pulse' }
       default:
         return { text: 'Ready (Press Mic or Spacebar)', color: 'bg-white text-[#5C5C5C] border-[#E0DAD2]' }
     }
@@ -328,7 +328,7 @@ export function VoiceSession({ user, topic, onEndSession }: VoiceSessionProps) {
             {messages.length === 0 && !liveTranscript && (
               <div className="h-64 flex flex-col items-center justify-center text-center text-[#8C8C8C]">
                 <Bot className="w-10 h-10 mb-2 opacity-50" />
-                <p className="text-sm font-body">Tap the microphone to speak. Kastu will reply and guide you.</p>
+                <p className="text-sm font-body">Tap the microphone to speak. kastu will reply and guide you.</p>
               </div>
             )}
 
@@ -347,7 +347,7 @@ export function VoiceSession({ user, topic, onEndSession }: VoiceSessionProps) {
                   {m.sender === 'agent' && (
                     <div className="flex items-center gap-1.5 text-xs text-[#1A8C7A] font-semibold mb-1">
                       <Volume2 className="w-3.5 h-3.5" />
-                      <span>Kastu Voice</span>
+                      <span>kastu voice</span>
                     </div>
                   )}
                   {m.text}

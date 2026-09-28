@@ -34,7 +34,7 @@ export function App() {
     return (
       <div className="min-h-screen bg-[#FAF8F5] flex items-center justify-center">
         <div className="text-center font-sans font-medium text-[#1A8C7A] animate-pulse">
-          Loading Kastu...
+          Loading kastu...
         </div>
       </div>
     )

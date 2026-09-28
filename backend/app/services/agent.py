@@ -112,6 +112,11 @@ class AmazonBedrockNovaAgentService(BaseAgentService):
                 "region_name": self.region,
                 "temperature": 0.7
             }
+            if self.guardrail_id:
+                kwargs["guardrails"] = {
+                    "guardrailIdentifier": self.guardrail_id,
+                    "guardrailVersion": self.guardrail_version or "DRAFT"
+                }
             if settings.aws_access_key_id and settings.aws_secret_access_key:
                 client = boto3.client(
                     "bedrock-runtime",

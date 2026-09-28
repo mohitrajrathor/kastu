@@ -40,7 +40,7 @@ export function Dashboard({ user, onSelectTopic }: DashboardProps) {
             Choose a practice topic
           </h1>
           <p className="text-sm sm:text-base text-[#5C5C5C] font-body mt-1">
-            Welcome, <span className="font-semibold text-[#1A8C7A]">{user.email}</span>. Pick a subject to converse naturally with Kastu.
+            Welcome, <span className="font-semibold text-[#1A8C7A]">{user.email}</span>. Pick a subject to converse naturally with kastu.
           </p>
         </div>
 

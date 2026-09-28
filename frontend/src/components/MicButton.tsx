@@ -43,9 +43,9 @@ export function MicButton({ isRecording, disabled = false, onClick }: MicButtonP
         } ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
       >
         {isRecording ? (
-          <Square className="w-8 h-8 fill-current" />
+          <Square className="w-8 h-8" strokeWidth={2.5} />
         ) : (
-          <Mic className="w-8 h-8" />
+          <Mic className="w-8 h-8" strokeWidth={2.5} />
         )}
       </button>
     </div>
