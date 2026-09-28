@@ -86,6 +86,15 @@ def seed_dev_user(dynamodb=None) -> Optional[dict]:
         dynamodb = get_dynamodb_resource()
     table = dynamodb.Table(settings.dynamodb_table_users)
 
+    # Ensure table is ready if newly created
+    try:
+        table.load()
+        if table.table_status != "ACTIVE":
+            logger.info("Waiting for table %s to become ACTIVE...", settings.dynamodb_table_users)
+            table.wait_until_exists()
+    except Exception as e:
+        logger.debug("Table status check: %s", e)
+
     try:
         resp = table.query(
             IndexName="email-index",
@@ -96,8 +105,21 @@ def seed_dev_user(dynamodb=None) -> Optional[dict]:
             logger.info("Developer user %s already exists in %s", settings.dev_user_email, settings.dynamodb_table_users)
             return resp["Items"][0]
     except Exception as e:
+        if "ResourceNotFoundException" in str(e):
+            try:
+                table.wait_until_exists()
+                resp = table.query(
+                    IndexName="email-index",
+                    KeyConditionExpression="email = :email",
+                    ExpressionAttributeValues={":email": settings.dev_user_email}
+                )
+                if resp.get("Items"):
+                    return resp["Items"][0]
+            except Exception:
+                pass
         logger.warning("Could not query %s for existing dev user: %s", settings.dynamodb_table_users, e)
 
+    item: Optional[dict] = None
     try:
         user_id = "dev-user-00000000-0000-0000-0000-000000000000"
         now = datetime.now(timezone.utc).isoformat()
@@ -114,5 +136,14 @@ def seed_dev_user(dynamodb=None) -> Optional[dict]:
         logger.info("Seeded developer test account: %s in %s", settings.dev_user_email, settings.dynamodb_table_users)
         return item
     except Exception as e:
+        if "ResourceNotFoundException" in str(e) and item is not None:
+            try:
+                table.wait_until_exists()
+                table.put_item(Item=item)
+                logger.info("Seeded developer test account after wait: %s in %s", settings.dev_user_email, settings.dynamodb_table_users)
+                return item
+            except Exception as retry_err:
+                logger.warning("Retry seed developer test account failed: %s", retry_err)
         logger.warning("Failed to seed developer test account: %s", e)
         return None
+
